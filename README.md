@@ -11,7 +11,8 @@ create file directories automatically for you
 - Able to create a precach for your particles
 
 ## ✍️ Usage
-1. Just open  `ozyris.py` file 
+1. Just Edit `ozyris.py` file goes to line 122 and modifies the basepath
+2. just start `ozyris.py` file
 
 ## ⚠️ Requirements
 Install Python
