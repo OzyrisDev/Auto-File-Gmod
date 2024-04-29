@@ -2,8 +2,7 @@
 create file directories automatically for you
 
 ## 📹 Preview
-
-![image](https://github.com/OzyrisDev/Auto-File-Gmod/assets/168485696/19041f04-51e0-4822-b255-8b727bbdffb6)
+![image](https://github.com/OzyrisDev/Auto-File-Gmod/assets/168485696/4d0400a4-edd7-4d6c-bcd3-d362d2d0e254)
 
 
 ## 🔥 Features
