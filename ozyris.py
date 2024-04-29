@@ -94,27 +94,27 @@ SWEP.DrawAmmo = false
 
 def create_weapons(addon_path):
     while True:
-        create_precache = input("Voulez-vous créer un fichier de precache ? (O/N): ")
-        if create_precache.lower() == 'o':
+        create_precache = input("Do you want to create a precache file (Y/N) : ")
+        if create_precache.lower() == 'y':
             create_precache_file(addon_path)
         elif create_precache.lower() == 'n':
             pass
         else:
-            print("Veuillez répondre par 'O' pour oui ou 'N' pour non.")
+            print("Please answer 'Y' for yes or 'N' for no.")
             continue
 
-        create_weapons = input("Voulez-vous créer un dossier 'weapons' ? (O/N): ")
-        if create_weapons.lower() == 'o':
-            weapons_name = input("Veuillez entrer le nom du weapons : ")
-            print_name = input("Veuillez entrer le nom à afficher in-game : ")
-            category = input("Veuillez entrer la catégorie de l'arme : ")
+        create_weapons = input("Do you want to create a 'weapons' folder (Y/N): ")
+        if create_weapons.lower() == 'y':
+            weapons_name = input("Please enter the name of the weapons : ")
+            print_name = input("Please enter the name to be displayed in-game: ")
+            category = input("Please enter the weapon category: ")
             weapons_path = os.path.join(addon_path, 'lua', 'weapons', weapons_name)
             os.makedirs(weapons_path)
             create_weapon_files(weapons_path, weapons_name, print_name, category)
         elif create_weapons.lower() == 'n':
             break
         else:
-            print("Veuillez répondre par 'O' pour oui ou 'N' pour non.")    
+            print("Please answer 'Y' for yes or 'N' for no.")    
 
 def create_addon_folder(addon_name):
     GESTURE_SLOT_CUSTOM = 0
@@ -167,8 +167,8 @@ end)''')
     
     create_weapons(addon_path)
     
-    print(f"Dossier addon '{addon_name}' créé avec succès.")
+    print(f"Addon folder '{addon_name}' created successfully.")
 
 if __name__ == "__main__":
-    addon_name = input("Veuillez entrer le nom de l'addon : ")
+    addon_name = input("Please enter the addon name : ")
     create_addon_folder(addon_name)
