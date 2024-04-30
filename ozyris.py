@@ -1,4 +1,5 @@
 import os
+import shutil
 
 def create_precache_file(addon_path):
     precache_content = '''local particlename = {
@@ -82,7 +83,7 @@ SWEP.Secondary.Ammo = "none"
 
 SWEP.DrawAmmo = false
 '''
-    
+
     with open(os.path.join(weapons_path, 'init.lua'), 'w') as f:
         f.write(init_lua_content)
         
@@ -109,34 +110,38 @@ def create_weapons(addon_path):
             print_name = input("Please enter the name to be displayed in-game: ")
             category = input("Please enter the weapon category: ")
             weapons_path = os.path.join(addon_path, 'lua', 'weapons', weapons_name)
-            os.makedirs(weapons_path)
+            os.makedirs(weapons_path, exist_ok=True)
             create_weapon_files(weapons_path, weapons_name, print_name, category)
         elif create_weapons.lower() == 'n':
             break
         else:
             print("Please answer 'Y' for yes or 'N' for no.")    
 
-def create_addon_folder(addon_name):
+def create_addon_folder():
     GESTURE_SLOT_CUSTOM = 0
 
-    base_path = r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\addons"
-    
+    base_path = input("Please enter the game folder path (ex : C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod) : ")
+    addon_name = input("Please enter the addon name : ")
     addon_path = os.path.join(base_path, addon_name)
     
-    os.makedirs(addon_path)
+    if os.path.exists(addon_path):
+        print("Name already used in addons file!")
+        return
+    
+    os.makedirs(addon_path, exist_ok=True)
     
     subfolders = ['materials', 'lua', 'models', 'particles', 'sound']
     
     for folder in subfolders:
-        os.makedirs(os.path.join(addon_path, folder))
+        os.makedirs(os.path.join(addon_path, folder), exist_ok=True)
     
     entities_path = os.path.join(addon_path, 'lua', 'entities')
-    os.makedirs(entities_path)
+    os.makedirs(entities_path, exist_ok=True)
     
     autorun_path = os.path.join(addon_path, 'lua', 'autorun')
-    os.makedirs(autorun_path)
-    os.makedirs(os.path.join(autorun_path, 'server'))
-    os.makedirs(os.path.join(autorun_path, 'client'))
+    os.makedirs(autorun_path, exist_ok=True)
+    os.makedirs(os.path.join(autorun_path, 'server'), exist_ok=True)
+    os.makedirs(os.path.join(autorun_path, 'client'), exist_ok=True)
     
     with open(os.path.join(autorun_path, 'server', 'sv_ozyris.lua'), 'w') as f:
         f.write('''
@@ -170,5 +175,4 @@ end)''')
     print(f"Addon folder '{addon_name}' created successfully.")
 
 if __name__ == "__main__":
-    addon_name = input("Please enter the addon name : ")
-    create_addon_folder(addon_name)
+    create_addon_folder()
