@@ -1,5 +1,4 @@
 import os
-import shutil
 
 def create_precache_file(addon_path):
     precache_content = '''local particlename = {
@@ -110,7 +109,7 @@ def create_weapons(addon_path):
             print_name = input("Please enter the name to be displayed in-game: ")
             category = input("Please enter the weapon category: ")
             weapons_path = os.path.join(addon_path, 'lua', 'weapons', weapons_name)
-            os.makedirs(weapons_path, exist_ok=True)
+            os.makedirs(weapons_path)
             create_weapon_files(weapons_path, weapons_name, print_name, category)
         elif create_weapons.lower() == 'n':
             break
@@ -128,20 +127,20 @@ def create_addon_folder():
         print("Name already used in addons file!")
         return
     
-    os.makedirs(addon_path, exist_ok=True)
+    os.makedirs(addon_path)
     
     subfolders = ['materials', 'lua', 'models', 'particles', 'sound']
     
     for folder in subfolders:
-        os.makedirs(os.path.join(addon_path, folder), exist_ok=True)
+        os.makedirs(os.path.join(addon_path, folder))
     
     entities_path = os.path.join(addon_path, 'lua', 'entities')
     os.makedirs(entities_path, exist_ok=True)
     
     autorun_path = os.path.join(addon_path, 'lua', 'autorun')
     os.makedirs(autorun_path, exist_ok=True)
-    os.makedirs(os.path.join(autorun_path, 'server'), exist_ok=True)
-    os.makedirs(os.path.join(autorun_path, 'client'), exist_ok=True)
+    os.makedirs(os.path.join(autorun_path, 'server'))
+    os.makedirs(os.path.join(autorun_path, 'client'))
     
     with open(os.path.join(autorun_path, 'server', 'sv_ozyris.lua'), 'w') as f:
         f.write('''
