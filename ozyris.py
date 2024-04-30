@@ -82,7 +82,7 @@ SWEP.Secondary.Ammo = "none"
 
 SWEP.DrawAmmo = false
 '''
-    
+
     with open(os.path.join(weapons_path, 'init.lua'), 'w') as f:
         f.write(init_lua_content)
         
@@ -116,12 +116,16 @@ def create_weapons(addon_path):
         else:
             print("Please answer 'Y' for yes or 'N' for no.")    
 
-def create_addon_folder(addon_name):
+def create_addon_folder():
     GESTURE_SLOT_CUSTOM = 0
 
-    base_path = r"C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod\addons"
-    
+    base_path = input("Please enter the game folder path (ex : C:\Program Files (x86)\Steam\steamapps\common\GarrysMod\garrysmod) : ")
+    addon_name = input("Please enter the addon name : ")
     addon_path = os.path.join(base_path, addon_name)
+    
+    if os.path.exists(addon_path):
+        print("Name already used in addons file!")
+        return
     
     os.makedirs(addon_path)
     
@@ -131,10 +135,10 @@ def create_addon_folder(addon_name):
         os.makedirs(os.path.join(addon_path, folder))
     
     entities_path = os.path.join(addon_path, 'lua', 'entities')
-    os.makedirs(entities_path)
+    os.makedirs(entities_path, exist_ok=True)
     
     autorun_path = os.path.join(addon_path, 'lua', 'autorun')
-    os.makedirs(autorun_path)
+    os.makedirs(autorun_path, exist_ok=True)
     os.makedirs(os.path.join(autorun_path, 'server'))
     os.makedirs(os.path.join(autorun_path, 'client'))
     
@@ -170,5 +174,4 @@ end)''')
     print(f"Addon folder '{addon_name}' created successfully.")
 
 if __name__ == "__main__":
-    addon_name = input("Please enter the addon name : ")
-    create_addon_folder(addon_name)
+    create_addon_folder()
